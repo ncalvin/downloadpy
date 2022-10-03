@@ -175,7 +175,15 @@ def main():
     logging.info('Signing in at: https://'+ domain + '.salesforce.com')
 
     # Connect to Salesforce
-    sf = Salesforce(username=username, password=password, security_token=token, domain=domain)
+    # Below add your proxy configuration
+    proxies = {
+        "http":  "http://YourLoginName:YourPassword@your.proxy.server:8080",  
+        "https": "http://YourLoginName:YourPassword@your.proxy.server:8080",
+    }
+    
+    # Connect to Salesforce
+    # Here include proxy parameters proxies=proxies to call function Salesforce below
+    sf = Salesforce(username=username, password=password, security_token=token, domain=domain, proxies=proxies)
     logging.debug("Connected successfully to {0}".format(sf.sf_instance))
 
     # initialize the csv file header row
